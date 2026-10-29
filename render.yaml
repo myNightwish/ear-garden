@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: ear-garden
+    runtime: static
+    buildCommand: node scripts/records.test.cjs && node --check dist/app.js && node --check dist/records.js
+    staticPublishPath: ./dist
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
