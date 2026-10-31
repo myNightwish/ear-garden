@@ -15,7 +15,7 @@ python3 -m http.server 8765 --directory dist
 ## 验证
 
 ```sh
-node scripts/records.test.cjs
+node scripts/practice.test.cjs && node --check dist/practice.js && node scripts/records.test.cjs
 node --check dist/app.js
 node --check dist/records.js
 ```
@@ -24,7 +24,7 @@ node --check dist/records.js
 
 根目录 `render.yaml` 定义 Render Static Site，仅发布 `dist/`。无需安装依赖、运行后端或配置环境变量。关联包含该文件的 Git 仓库后，可以使用 Render Blueprint 创建站点；也可以手动创建 Static Site，使用以下设置：
 
-- Build Command: `node scripts/records.test.cjs && node --check dist/app.js && node --check dist/records.js`
+- Build Command: `node scripts/practice.test.cjs && node --check dist/practice.js && node scripts/records.test.cjs && node --check dist/app.js && node --check dist/records.js`
 - Publish Directory: `dist`
 - Root Directory: 留空（本项目为仓库根目录时）
 
@@ -33,3 +33,15 @@ node --check dist/records.js
 ## 练习数据
 
 数据只保存在当前浏览器的 localStorage 中，不上传到服务器。更换域名、浏览器或设备不会自动迁移记录。旧版总成绩使用 `ear-garden-stats`，分专题记录使用 `ear-garden-records-v1`。
+
+## 练习操作
+
+每轮可选 10 或 20 题，显示完成进度与轮末总结。普通练习按题型组合打乱循环，连续两题不会完全相同；错题重练会还原原题。切换范围、音区、音色、题量或刷新会重新开始本轮，累计记录保留。
+
+- 空格：重听目标。
+- 1–9：从左到右选择答案；第 10–12 项使用 0、-、=。
+- Shift + 对应选项键：仅试听，不修改答案。
+- Enter：确认；揭晓后再按进入下一题或下一轮。
+- 低音短句：依次选择三个音，自动切换音位；左右方向键或点击音位可以修改。
+
+表单下拉框、练习记录面板等控件保留自己的键盘操作。

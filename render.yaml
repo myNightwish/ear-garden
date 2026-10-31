@@ -2,7 +2,7 @@ services:
   - type: web
     name: ear-garden
     runtime: static
-    buildCommand: node scripts/records.test.cjs && node --check dist/app.js && node --check dist/records.js
+    buildCommand: node scripts/practice.test.cjs && node --check dist/practice.js && node scripts/records.test.cjs && node --check dist/app.js && node --check dist/records.js
     staticPublishPath: ./dist
     headers:
       - path: /*
