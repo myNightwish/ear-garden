@@ -34,6 +34,11 @@ for(const [m,t,a,s] of [['direction',[60,64],[2],[0]],['bass',[60,62,64],[60,62,
 }
 assert.equal(run('records.mistakes.length'),5,'all four modes record exact targets');
 assert.deepEqual(Array.from(run("records.mistakes.find(m=>m.context.mode==='chord').target")),[60,1]);
+const topicCount=run('Object.keys(records.topics).length');
+controls.timbre.value='pure';
+run('currentReview=records.mistakes[0].id;mode="match";target=[60];selection=[60];recordAttempt(false,true,[60])');
+assert.equal(run('Object.keys(records.topics).length'),topicCount,'timbre comparison during review keeps original topic');
+controls.timbre.value='soft';
 const restored={localStorage:sandbox.localStorage};vm.createContext(restored);vm.runInContext(readFileSync('dist/records.js','utf8'),restored);
 assert.equal(vm.runInContext('records.mistakes.length',restored),5,'records survive reload');
 console.log('PASS: topic separation, deduplication, reveal, retry scoring, exact targets, persistence');

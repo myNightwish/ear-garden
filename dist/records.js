@@ -9,7 +9,7 @@ function topicLabel(c){const option=Array.from($('difficulty').options).find(o=>
 function answerLabel(m,values,targetNotes){if(!values.length||values.every(n=>n===null||n===undefined))return '未作答';if(m==='direction')return ['更低','相同','更高'][values[0]]||'未作答';if(m==='chord')return values[0]===undefined?'未作答':note(targetNotes[0])+' '+['大三和弦','小三和弦'][values[0]];return values.map(n=>n===null||n===undefined?'?':note(n)).join(' → ')}
 function saveRecords(){try{localStorage.setItem(RECORD_KEY,JSON.stringify(records));recordStorageError=false}catch{recordStorageError=true}}
 function recordAttempt(revealed,correct,answer){
-  const context=topicContext(),key=topicKey(context);
+  const context=(currentReview&&records.mistakes.find(m=>m.id===currentReview)?.context)||topicContext(),key=topicKey(context);
   const topic=records.topics[key]??={context,total:0,correct:0,wrong:0,revealed:0,reviewTotal:0,reviewCorrect:0};
   const result=revealed?'revealed':correct?'correct':'wrong';
   if(currentReview){
